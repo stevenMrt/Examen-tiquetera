@@ -1,0 +1,21 @@
+{
+  "name": "api-exa",
+  "version": "1.0.0",
+  "description": "API REST con Express y MongoDB",
+  "keywords": [],
+  "author": "Steven Martinez",
+  "license": "ISC",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "i": "^0.3.7",
+    "mongoose": "^8.18.1"
+  }
+}
