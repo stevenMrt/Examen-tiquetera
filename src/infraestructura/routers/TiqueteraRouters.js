@@ -1,19 +1,18 @@
 import { Router } from "express";
 import {
-    createTiquetera,
-    getTiqueteras,
-    getTiqueteraById,
-    updateTiquetera,
-    deleteTiquetera
-
+  createTiquetera,
+  getTiquetera,
+  getTiqueteraByIdController,
+  updateTiquetera,
+  deleteTiquetera,
 } from "../controllers/TiqueteraController.js";
 
 const router = Router();
 
-router.post("/tiqueteras", createTiquetera);
-router.get("/tiqueteras", getTiqueteras);
-router.get("/tiqueteras/:id", getTiqueteraById);
-router.put("/tiqueteras/:id", updateTiquetera);
-router.delete("/tiqueteras/:id", deleteTiquetera);
+router.post("/", createTiquetera);        
+router.get("/", getTiquetera);            
+router.get("/:id", getTiqueteraByIdController);
+router.put("/:id", updateTiquetera);      
+router.delete("/:id", deleteTiquetera);   
 
 export default router;

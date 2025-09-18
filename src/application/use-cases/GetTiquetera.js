@@ -1,9 +1,11 @@
 class GetTiquetera {
-    constructor(tiqueteraRepository) {
-        this.tiqueteraRepository = tiqueteraRepository;
-    }
-    async execute() {
-        const tiquetera = await this.tiqueteraRepository.getById(id);
-        return tiquetera;
-    }
+  constructor(tiqueteraRepository) {
+    this.tiqueteraRepository = tiqueteraRepository;
+  }
+
+  async execute() {
+    return await this.tiqueteraRepository.findAll();
+  }
 }
+
+export default GetTiquetera;

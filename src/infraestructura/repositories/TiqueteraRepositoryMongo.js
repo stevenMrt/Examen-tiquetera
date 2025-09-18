@@ -1,35 +1,42 @@
-import mongosse from "mongoose";
+import mongoose from "mongoose";
 
-const tiqueteraSchema = new mongosse.Schema({
-    numeroTiquetera: { type: String, required: true, unique: true },
-    cliente: { type: String, required: true },
-    saldo: { type: Number, default: 0 },
-    totalTransacciones: {},
+const tiqueteraSchema = new mongoose.Schema({
+  numeroTiquetera: { type: String, required: true, unique: true },
+  cliente: { type: String, required: true },
+  saldo: { type: Number, default: 0 },
+  totalTransacciones: { type: Number, default: 0 },
 });
-const TiqueteraModel = mongosse.model("Tiquetera", tiqueteraSchema);
 
-class TiqueteraRepositoryMongo {
-    constructor() {
-        this.tiqueteraModel = TiqueteraModel;
-    }
-async create(tiqueteraData) {
-    const tiquetera = new this.tiqueteraModel(tiqueteraData);
-    return await tiquetera.save();
-}
-async findAll() {
-    return await this.tiqueteraModel.find();
+const TiqueteraModel = mongoose.model("Tiquetera", tiqueteraSchema);
+
+class TiqueteraRepository {
+  async create(data) {
+    return await new TiqueteraModel(data).save();
+  }
+
+  async findAll() {
+    return await TiqueteraModel.find();
+  }
+
+  async findById(id) {
+    return await TiqueteraModel.findById(id);
+  }
+
+  async updateById(id, data) {
+    return await TiqueteraModel.findByIdAndUpdate(id, data, { new: true });
+  }
+
+  async deleteById(id) {
+    return await TiqueteraModel.findByIdAndDelete(id);
+  }
+
+  async incrementarTransaccion(id) {
+    return await TiqueteraModel.findByIdAndUpdate(
+      id,
+      { $inc: { totalTransacciones: 1 } },
+      { new: true }
+    );
+  }
 }
 
-async findById(id) {
-    return await this.tiqueteraModel.findById(id);
-}
-
-async updateById(id, tiqueteraData) {
-    return await this.tiqueteraModel.findByIdAndUpdate(id, tiqueteraData, { new: true });
-}
-
-async deleteById(id) {
-    return await this.tiqueteraModel.findByIdAndDelete(id);
-}
-}
-export default TiqueteraRepositoryMongo;
+export default TiqueteraRepository;
